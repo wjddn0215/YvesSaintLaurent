@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Marcellus+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet"/>
+    <script type="text/javascript">
+	    $(document).ready(function(){
+		    $(".style-nav ul.sub").hide();
+		    $(".style-nav ul.menu li").click(function(){
+			    $("ul",this).slideToggle("fast");
+		    });
+	    });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //사용할 배너
+            var $banner = $(".banner").find("ul");
+    
+            var $bannerWidth = $banner.children().outerWidth();//배너 이미지의 폭
+            var $bannerHeight = $banner.children().outerHeight(); // 높이
+            var $bannerLength = $banner.children().length;//배너 이미지의 갯수
+            var rollingId;
+    
+            //정해진 초마다 함수 실행
+            rollingId = setInterval(function() { rollingStart(); }, 1800);//다음 이미지로 롤링 애니메이션 할 시간차
+    
+            //마우스 오버시 롤링을 멈춘다.
+            $(".banner").mouseover(function () { 
+                //중지
+                clearInterval(rollingId);
+                $(this).css("cursor", "pointer"); 
+            });
+            //마우스 아웃되면 다시 시작
+            $(".banner").mouseout(function(){
+                rollingId = setInterval(function() { rollingStart(); }, 1800);
+                $(this).css("cursor", "default");
+            });
+            
+            function rollingStart() {
+                $banner.css("width", $bannerWidth * $bannerLength + "px");
+                $banner.css("height", $bannerHeight + "px");
+                //alert(bannerHeight);
+                //배너의 좌측 위치를 옮겨 준다.
+                $banner.animate({left: - $bannerWidth + "px"}, 1800, function() { //숫자는 롤링 진행되는 시간이다.
+                    //첫번째 이미지를 마지막 끝에 복사(이동이 아니라 복사)해서 추가한다.
+                    $(this).append("<li>" + $(this).find("li:first").html() + "</li>");
+                    //뒤로 복사된 첫번재 이미지는 필요 없으니 삭제한다.
+                    $(this).find("li:first").remove();
+                    //다음 움직임을 위해서 배너 좌측의 위치값을 초기화 한다.
+                    $(this).css("left", 0);
+                    //이 과정을 반복하면서 계속 롤링하는 배너를 만들 수 있다.
+                });
+            }
+        }); 
+    </script>
+	<script type="text/javascript">
+            $(function(){
+                $("#container ul.panel li:not("+$("#container ul.tab li a.selected").attr("href")+")").hide()
+                $("#container ul.tab li a").click(function(){
+                    $("#container ul.tab li a").removeClass("selected").css('color','black').css('border-bottom','hidden');
+                    $(this).addClass("selected").css('color','gray').css('border-bottom','2px solid #c04478');
+                    $("#container ul.panel li").slideUp("1");
+                    $($(this).attr("href")).slideDown("1");
+                    return false;
+                });
+            });
+    </script>
+    <script type="text/javascript">
+        window.onload=function(){
+            var video = document.getElementByClassName('vd')
+            viewport.addEventListener('mouseover', function() { video.play() }, false);
+            viewport.addEventListener('mouseout', function() { video.pause() }, false);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="style-logo">
+            <button onclick="window.location.href='login.html'">LOGIN</button>
+            <button onclick="window.location.href='register.html'">SIGN IN</button>
+        </div>
+        
+        <nav class="style-nav">
+            <ul class="menu">
+                <li><a href="#">NEW</a>
+                    <ul class="sub">
+                        <li><a href="">WHAT'S NEW</a></li> 
+                       </ul>
+                    </li>
+                <li><a href="#">BEST SELLER</a></li>
+                <li><a href="index.html"><img style="width: 200px; height: 47.5px;" src="logohome.jpg" alt="Home"></a></li>   
+                <li><a href="#">MAKE UP</a>
+                    <ul class="sub">
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">페이스</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">립</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">아이</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">네일</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">악세서리</a></li>
+                       </ul>
+                </li>
+                <li><a href="#">SKIN CARE</a>
+                    <ul class="sub">
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">클렌저/토너</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">세럼</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">에멀전/크림</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">아이/립 케어</a></li>
+                    </ul>
+                    <ul class="sub">
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">UV 프로텍션/베이스</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">스페셜 케어</a></li>
+                        <li><a href="" style="font-family: 'Nanum Gothic', sans-serif;">메이크업 세팅 스프레이</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div class="contents" >
+            <div class="banner">
+                <ul>
+                    <li><img src="/visual1.jpg" width="800px" height="400px"></li>
+                    <li><img src="/visual2.png" width="800px" height="400px"></li>
+                    <li><img src="/visual3.png" width="800px" height="400px"></li>
+                </ul>
+            </div>
+        </div>    
+    </section>
+    
+    <main>
+        <div id="container">
+            <h3>입생로랑 뷰티 추천 제품</h3>
+			<ul class="tab">
+				<li><a href="#tab1" class="selected">립 메이크업</a></li>
+				<li><a href="#tab2">페이스 메이크업</a></li>
+				<li><a href="#tab3">향수</a></li>
+			</ul>
+			<ul class="panel">
+				<li id="tab1">
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/rip1.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/rip2.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/rip3.png"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+				</li>
+				<li id="tab2">
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/face1.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/face2.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/face3.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+				</li>
+				<li id="tab3">
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/per1.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/per2.jpg"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+                    <div class="jb-wrap">
+                        <div class="jb-image"><img src="/per3.png"></div>
+                        <button class="jb-text">바로 구매</button>
+                    </div>
+				</li>
+			</ul>
+		</div>
+    </main>
+    <section>
+        <div class="container">
+            <video id="video"  autoplay loop muted>
+                <source src="/test.mp4" type="video/mp4" />
+            </video>
+            <div class="overlay">
+                <p>FOCUS ON</p>
+                <h3>입생로랑 아이코닉 향수<br>새로운 자유. LIBRE</h3>
+                <a href="#">더 알아보기</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
